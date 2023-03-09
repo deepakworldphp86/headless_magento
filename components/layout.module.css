@@ -1,7 +1,8 @@
 .container {
     max-width: auto;
-    padding: 0 1rem;
-    margin: 0rem auto 6rem;
+    max-height: auto;
+    padding: 0 0rem;
+    margin: 0rem auto 0rem;
   }
   
   .header {
@@ -40,4 +41,5 @@
     background-color: #111111;
   }
 
-  
+
+.footer-copyright{background-color: rgba(0, 0, 0, 0.05)}

@@ -4,6 +4,8 @@ import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import Header from './Header';
+import Footer from './Footer';
+
 
 const name = 'Deepak Kumar';
 export const siteTitle = 'Next.js Blog Website';
@@ -27,7 +29,7 @@ export default function Layout({ children, home }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Header />
-     
+
       <header className={styles.header}>
         {home ? (
           <>
@@ -61,12 +63,16 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
-      <main>{children}</main>
+
+      <main>
+        {children}
+      </main>
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">← Back to home</Link>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

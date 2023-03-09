@@ -55,8 +55,8 @@ export default function category() {
         <li key={index}> <Link value={cat.id}  href={`/product/${cat.id}`}  >{cat.name} </Link></li>
 
       ))}
-      <li>  <Link  href="/posts/pre-rendering">Pre-rendering </Link></li>
-      <li> <Link  href="/posts/ssg-ssr" >Server-side Rendering </Link></li>
+      {/* <li>  <Link  href="/posts/pre-rendering">Pre-rendering </Link></li>
+      <li> <Link  href="/posts/ssg-ssr" >Server-side Rendering </Link></li> */}
     </ul>
   );
 }

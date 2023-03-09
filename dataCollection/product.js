@@ -3,7 +3,7 @@ import styles from '../components/product.module.css';
 import { useRouter } from 'next/router'
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
-
+import parseHtml from 'html-react-parser';
 export default function productData() {
 
   const router = useRouter()
@@ -116,29 +116,48 @@ export default function productData() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <div  class="row">
+      <div className="row">
         {data.products.items.map((product, index) => (
-                  <div class="item col-xs-4 col-lg-4">
-                  <div class="thumbnail card">
-                      <div class="img-event">
-                          <img class="group list-group-image img-fluid" src={product.small_image.url} alt={product.name} />
-                      </div>
-                      <div class="caption card-body">
-                          <h4 class="group card-title inner list-group-item-heading">
-                             {product.name}</h4>
-                          <p class="group inner list-group-item-text">
-                          {product.description.html}</p>
-                          <div class="row">
-                              <div class="col-xs-12 col-md-6">
-                                  <p class="lead">{product.special_price}</p>
-                              </div>
-                              <div class="col-xs-12 col-md-6">
-                                  <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+          <div className="col-md-4 mt-2">
+            <div className="card">
+              <div className="card-body">
+                <div className="card-img-actions">
+
+                  <img className="card-img img-fluids" width="96" height="350" src={product.small_image.url} alt={product.name} />
+
+                </div>
               </div>
+
+              <div className="card-body bg-light text-center">
+                <div className="mb-2">
+                  <h6 className="font-weight-semibold mb-2">
+                    <a href="#" className="text-default mb-2" data-abc="true"> {parseHtml(product.short_description.html)} </a>
+                  </h6>
+
+                  <a href="#" className="text-muted" data-abc="true">{product.name}</a>
+                </div>
+
+                <h3 className="mb-0 font-weight-semibold">{product.special_price}</h3>
+
+                <div>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                </div>
+
+                <div className="text-muted mb-3">34 reviews</div>
+
+                <button type="button" className="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+              </div>
+            </div>
+
+
+
+
+          </div>
         ))}
       </div>
     </Layout>
