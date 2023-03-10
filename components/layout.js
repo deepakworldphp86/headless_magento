@@ -5,6 +5,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import Header from './Header';
 import Footer from './Footer';
+import Script from 'next/script'
 
 
 const name = 'Deepak Kumar';
@@ -27,6 +28,9 @@ export default function Layout({ children, home }) {
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <Script src="./mdb.min.js" />
+
+
       </Head>
       <Header />
 

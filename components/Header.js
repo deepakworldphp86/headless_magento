@@ -6,7 +6,7 @@ export default function Header() {
     return (
         <div>
             <header>
-                <nav>
+                <nav  className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
                     <CatLinks />
                 </nav>
             </header>

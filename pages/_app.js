@@ -1,5 +1,7 @@
 import '../styles/global.css';
 import '../styles/bootstrap.min.css';
+import '../styles/bootstrap-mega-menu.min.css';
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
 
 import { ApolloClient, ApolloProvider,InMemoryCache } from "@apollo/client";
 
