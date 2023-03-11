@@ -1,113 +1,166 @@
 import { gql, useQuery } from "@apollo/client";
-import styles from '../components/layout.module.css';
-import Link from "next/link";
+import styles from '../components/product.module.css';
+import { useRouter } from 'next/router'
+import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
+import parseHtml from 'html-react-parser';
+export default function productData() {
 
-export const CAT_QUERY = gql`
-{
-    category(id: 2) {
-      products {
-        total_count
-        page_info {
-          current_page
-          page_size
-        }
-      }
-      children_count
-      children {
+  const router = useRouter()
+  const { id } = router.query
+  const PRODUCT_QUERY = gql`
+  {
+    products(
+      filter: {category_id: {eq:  ${id} }},
+      sort: {name: ASC},
+      pageSize: 20,
+      currentPage: 1
+    ) {
+      total_count
+      items {
         id
-        level
         name
-        path
-        children {
-          id
-          level
-          name
-          path
-          children {
-            id
-            level
-            name
-            path
-            children {
-              id
-              level
-              name
-              path
+        sku
+        stock_status
+        only_x_left_in_stock
+        meta_keyword
+        meta_description
+        special_price
+        special_from_date
+        special_to_date
+        attribute_set_id
+        manufacturer
+        special_price
+        special_from_date
+        
+        price {
+          regularPrice {
+            amount {
+              value
+              currency
+            }
+          }
+        }
+        description {
+          html
+        }
+        short_description {
+          html
+        }
+        small_image {
+          url
+          label
+          position
+          disabled
+        }
+        thumbnail {
+          url
+          label
+          position
+          disabled
+        }
+        image {
+          url
+          label
+          position
+          disabled
+        }
+        media_gallery {
+         url
+          label
+          position
+          disabled
+        }
+        price_range {
+          minimum_price {
+            regular_price {
+              value
+              currency
+            }
+            final_price {
+              value
+              currency
+            }
+            discount {
+              amount_off
+              percent_off
+            }
+          }
+          maximum_price {
+            regular_price {
+              value
+              currency
+            }
+            final_price {
+              value
+              currency
+            }
+            discount {
+              amount_off
+              percent_off
             }
           }
         }
       }
     }
-  } 
+  }
 `;
 
 
-export default function category() {
-  const { loading, error, data } = useQuery(CAT_QUERY);
+  const { loading, error, data } = useQuery(PRODUCT_QUERY);
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-
   return (
-    // <ul className={styles.menu} >
-    //   {data.category.children.map((cat, index) => {
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
+      <div className="row">
+        {data.products.items.map((product, index) => (
+          <div className="col-md-4 mt-2">
+            <div className="card">
+              <div className="card-body">
+                <div className="card-img-actions">
 
-    //     return <li key={index}> <Link value={cat.id} href={`/product/${cat.id}`}  >{cat.name} </Link></li>
+                  <img className="card-img img-fluids" width="96" height="350" src={product.small_image.url} alt={product.name} />
 
-    //   })}
-    //   {/* <li>  <Link  href="/posts/pre-rendering">Pre-rendering </Link></li>
-    //   <li> <Link  href="/posts/ssg-ssr" >Server-side Rendering </Link></li> */}
-    // </ul>
-
-
-
-    <div className="container-fluid">
-      <button className="navbar-toggler px-0" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarExampleOnHover" aria-controls="navbarExampleOnHover" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i className="fas fa-bars"></i>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarExampleOnHover">
-        <ul className="navbar-nav me-auto ps-lg-0" >
-
-          {data.category.children.map((cat, index) => {
-
-            if (cat.children.length) {
-              return <li className="nav-item dropdown dropdown-hover position-static">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                  data-mdb-toggle="dropdown" aria-expanded="false">
-                  {cat.name}
-                </a>
-                <div className="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdown" >
-                {cat.children.map((level1, index) => {
-                  return <div className="container">
-                      <div className="row my-4">
-                        <div className="col-md-6 col-lg-3 mb-3 mb-lg-0">
-                          <div className="list-group list-group-flush">
-                            <a href={`/product/${level1.id}`} className="list-group-item list-group-item-action"> {level1.name}</a>
-                            {level1.children.map((level2, index) => {
-                              //console.log(level2);
-                              return <a href={`/product/${level2.id}`} className="list-group-item list-group-item-action"> {level2.name}</a>
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  
-                })}
                 </div>
-              </li>
-            } else {
-              return <li className="nav-item">
-                <a className="nav-link" href={`/product/${cat.id}`} > {cat.name}</a>
-              </li>
+              </div>
 
-            }
+              <div className="card-body bg-light text-center">
+                <div className="mb-2">
+                  <h6 className="font-weight-semibold mb-2">
+                    <a href="#" className="text-default mb-2" data-abc="true"> {parseHtml(product.short_description.html)} </a>
+                  </h6>
 
-          })}
-        </ul>
+                  <a href="#" className="text-muted" data-abc="true">{product.name}</a>
+                </div>
+
+                <h3 className="mb-0 font-weight-semibold">{product.special_price}</h3>
+
+                <div>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                  <i className="fa fa-star star"></i>
+                </div>
+
+                <div className="text-muted mb-3">34 reviews</div>
+
+                <button type="button" className="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
+
+
+              </div>
+            </div>
+
+
+
+
+          </div>
+        ))}
       </div>
-    </div>
+    </Layout>
   );
 }
+

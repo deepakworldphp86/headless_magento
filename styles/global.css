@@ -7,6 +7,9 @@ body {
   line-height: 1.5385;
   color: #333;
   text-align: left;
+  background: #eaafc8;
+  background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);
+  background: linear-gradient(to right, #eaafc8, #654ea3);
 }
 
 * {
@@ -35,3 +38,12 @@ img {
   pointer-events: none;
 }
 .mtop-50 {margin-top: 50px !important;}
+
+/*Errors and Message*/
+
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}
