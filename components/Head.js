@@ -18,7 +18,8 @@ export default function HeadArea() {
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
-        <Script src="./mdb.min.js" />
+        <script type="text/javascript" src="/js/mdb.min.js"></script>
+
       </Head>
   );
 }
