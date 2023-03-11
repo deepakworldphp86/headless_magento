@@ -77,12 +77,11 @@ export default function Navigation() {
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         {cat.name}
                       </a>
-                      <div className="dropdown-menu w-100 mt-0" aria-labelledby="navbarDropdown" >
-                      <div className="row my-4">
-                        {cat.children.map((level1, index) => {
-                          return <div className="container">
-                           
-                              <div className="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                      <div className="dropdown-menu w-50 mt-0" aria-labelledby="navbarDropdown" >
+                        <div className="container">
+                          <div className="row my-4">
+                            {cat.children.map((level1, index) => {
+                              return <div className="col-md-6 col-lg-3 mb-3 mb-lg-0">
                                 <div className="list-group list-group-flush">
                                   <a href={`/category/${level1.id}`} className="font-weight-bold text-uppercase list-group-item list-group-item-action"> {level1.name}</a>
                                   {level1.children.map((level2, index) => {
@@ -91,11 +90,9 @@ export default function Navigation() {
                                   })}
                                 </div>
                               </div>
-                            </div>
-                         
-
-                        })}
-                         </div>
+                            })}
+                          </div>
+                        </div>
                       </div>
                     </li>
                   } else {
