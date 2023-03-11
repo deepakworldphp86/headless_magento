@@ -81,12 +81,12 @@ export default function Navigation() {
                         <div className="container">
                           <div className="row my-4">
                             {cat.children.map((level1, index) => {
-                              return <div className="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                              return <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
                                 <div className="list-group list-group-flush">
                                   <a href={`/category/${level1.id}`} className="font-weight-bold text-uppercase list-group-item list-group-item-action"> {level1.name}</a>
                                   {level1.children.map((level2, index) => {
                                     //console.log(level2);
-                                    return <a href={`/category/${level2.id}`} className="list-group-item list-group-item-action"> {level2.name}</a>
+                                    return <a href={`/category/${level2.id}`} className="list-group-item list-group-item-action"> <i className="fas fa-caret-right pe-2"></i>{level2.name}</a>
                                   })}
                                 </div>
                               </div>
