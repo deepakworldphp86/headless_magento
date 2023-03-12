@@ -19,6 +19,9 @@ export default function HeadArea() {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="text/javascript" src="/js/mdb.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
 
       </Head>
   );

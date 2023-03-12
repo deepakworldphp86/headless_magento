@@ -123,7 +123,7 @@ export default function productData() {
               <div className="card-body">
                 <div className="card-img-actions">
 
-                  <img className="card-img img-fluids" width="96" height="350" src={product.small_image.url} alt={product.name} />
+                  <a href={`/product/${product.sku}`}><img className="card-img img-fluids" width="96" height="350" src={product.small_image.url} alt={product.name} /> </a>
 
                 </div>
               </div>
